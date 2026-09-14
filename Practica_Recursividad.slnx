@@ -34,3 +34,88 @@ namespace Recursividad.Logica
         }
     }
 }
+
+
+
+
+using System;
+
+namespace AplicacionConsola
+{
+    // Clase con los métodos recursivos
+    public static class MetodosRecursivos
+    {
+        // Ejercicio 1: Contar vocales
+        public static int ContarVocales(string str)
+        {
+            if (string.IsNullOrEmpty(str)) return 0;
+
+            char c = char.ToLower(str[0]);
+            int esVocal = "aeiouáéíóú".Contains(c) ? 1 : 0;
+
+            return esVocal + ContarVocales(str.Substring(1));
+        }
+
+        // Ejercicio 2: Suma de dígitos
+        public static int SumarDigitos(int n)
+        {
+            if (n < 10) return n;
+            return (n % 10) + SumarDigitos(n / 10);
+        }
+
+        // Ejercicio 3: Suma de los primeros n números S(n)
+        public static int SumarPrimerosNumeros(int n)
+        {
+            if (n <= 0) return 0;
+            return n + SumarPrimerosNumeros(n - 1);
+        }
+    }
+
+    // Programa principal
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // EJERCICIO 1 
+            Console.WriteLine("EJERCICIO 1: Contar Vocales");
+            Console.Write("Ingrese una cadena de texto: ");
+            string texto = Console.ReadLine();
+            int totalVocales = MetodosRecursivos.ContarVocales(texto);
+            Console.WriteLine($"Numero de vocales: {totalVocales}\n");
+
+            // EJERCICIO 2 
+            Console.WriteLine("EJERCICIO 2: Secuencia de Enteros Positivos");
+            Console.Write("¿Cuantos numeros ingresara en la secuencia? ");
+            int cantidad = int.Parse(Console.ReadLine());
+
+            int mayorNumero = -1;
+            int mayorSuma = -1;
+
+            for (int i = 1; i <= cantidad; i++)
+            {
+                Console.Write($"Ingrese el numero #{i}: ");
+                int num = int.Parse(Console.ReadLine());
+                int sumaActual = MetodosRecursivos.SumarDigitos(num);
+
+                if (sumaActual > mayorSuma)
+                {
+                    mayorSuma = sumaActual;
+                    mayorNumero = num;
+                }
+            }
+
+            if (cantidad > 0)
+            {
+                Console.WriteLine($"El entero cuya suma de digitos es mayor es: {mayorNumero} (Suma de dígitos: {mayorSuma})\n");
+            }
+
+            // EJERCICIO 3 
+            Console.WriteLine("EJERCICIO 3: Suma de los primeros n numeros");
+            Console.Write("Ingrese el valor de n: ");
+            int n = int.Parse(Console.ReadLine());
+            int resultadoSuma = MetodosRecursivos.SumarPrimerosNumeros(n);
+            Console.WriteLine($"Suma S({n}): {resultadoSuma}");
+             
+        }
+    }
+}
