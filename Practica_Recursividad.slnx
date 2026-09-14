@@ -1,1 +1,36 @@
-<Solution />
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Recursividad.Logica
+{
+    public static class EjerciciosRecursivos
+    {
+        
+        // Ejercicio 1: Contar vocales en una cadena
+        public static int ContarVocales(string str)
+        {
+            if (string.IsNullOrEmpty(str)) return 0;
+
+            char c = char.ToLower(str[0]);
+            int esVocal = "aeiouáéíóú".Contains(c) ? 1 : 0;
+
+            return esVocal + ContarVocales(str.Substring(1));
+        }
+
+        // Ejercicio 2: Suma de dígitos de un entero positivo
+        public static int SumarDigitos(int n)
+        {
+            if (n < 10) return n;
+            return (n % 10) + SumarDigitos(n / 10);
+        }
+
+        // Ejercicio 3: Suma de los primeros n números positivos S(n)
+        
+        public static int SumarPrimerosNumeros(int n)
+        {
+            if (n <= 0) return 0;
+            return n + SumarPrimerosNumeros(n - 1);
+        }
+    }
+}
